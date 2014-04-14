@@ -1,0 +1,44 @@
+name: StaffChat
+main: net.javaportals.staffchat.StaffChat
+version: 2.2.0
+author: JavaPortals
+website: http://javaportals.net/
+softdepend: [Vault]
+commands:
+  staffchat:
+    description: "Speak in the StaffChat"
+    aliases: [sc, s]
+  togglestaffchat:
+    description: "Toggle the StaffChat"
+    aliases: [tsc, ts]
+  reloadstaffchat:
+    description: "Reload the StaffChat configuration"
+    aliases: [rsc, rs]
+  staffchatupdate:
+    description: "Check for updates"
+    aliases: [scu, su]
+permissions:
+  staffchat.*:
+    description: This permission will give access to all staff chat permissions
+    default: op
+    children:
+      staffchat.speak: true
+      staffchat.listen: true
+      staffchat.color: true
+      staffchat.reload: true
+      staffchat.update: true
+  staffchat.speak:
+    default: op
+    description: This permission will allow the user to speak to the staff chat.
+  staffchat.listen:
+    default: op
+    description: This permission will allow the user to receive staff chat messages
+  staffchat.color:
+    default: op
+    description: This permission will allow the user to use colors in the staff chat
+  staffchat.reload:
+    default: op
+    description: This permission will allow the user to reload the staff chat configuration
+  staffchat.update:
+    default: op
+    description: This permission will tell the user if a update is available
