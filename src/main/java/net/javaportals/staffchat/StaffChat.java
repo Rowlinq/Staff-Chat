@@ -25,8 +25,9 @@ public class StaffChat extends JavaPlugin
 	public void onEnable()
 	{
 		
-		this.setUpdater(new Updater());
 		this.setConfiguration(new Configuration());
+		
+		this.setUpdater(new Updater(this, 46910, this.getFile(), Updater.UpdateType.DEFAULT, true));
 		
 		if(this.isVaultPresent())
 		{
@@ -57,7 +58,6 @@ public class StaffChat extends JavaPlugin
 		this.getCommand("staffchat").setExecutor(new SpeakCommand());
 		this.getCommand("togglestaffchat").setExecutor(new ToggleCommand());
 		this.getCommand("reloadstaffchat").setExecutor(new ReloadCommand());
-		this.getCommand("staffchatupdate").setExecutor(new UpdateCommand());
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
 		

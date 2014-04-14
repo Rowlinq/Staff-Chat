@@ -1,6 +1,7 @@
 package net.javaportals.staffchat.listener;
 
 import net.javaportals.staffchat.StaffChat;
+import net.javaportals.staffchat.updater.Updater;
 import net.javaportals.staffchat.utils.Permissions;
 import net.javaportals.staffchat.utils.StringUtilities;
 
@@ -35,10 +36,10 @@ public class JoinListener implements Listener
 			
 		}
 		
-		if(e.getPlayer().hasPermission(Permissions.UPDATE) && StaffChat.getStaffChat().getUpdater().isUpdateAvailable())
+		if(e.getPlayer().hasPermission(Permissions.UPDATE) && StaffChat.getStaffChat().getUpdater().getResult() == Updater.UpdateResult.UPDATE_AVAILABLE)
 		{
 			
-			e.getPlayer().sendMessage(StringUtilities.formatInfo("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroe"));
+			e.getPlayer().sendMessage(StringUtilities.formatInfo("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroe or do /update to update it automatically"));
 			
 		}
 		

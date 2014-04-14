@@ -34,7 +34,7 @@ public class ChatListener implements Listener
 		}
 		
 		e.setCancelled(true);
-		broadcastStaffMessage(parseStaffMessage(e.getPlayer(), e.getMessage()));
+		broadcastMessage(e.getPlayer(), e.getMessage());
 		
 	}
 	

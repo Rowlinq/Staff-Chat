@@ -27,7 +27,7 @@ public class SpeakCommand implements CommandExecutor
 			
 		}
 		
-		broadcastStaffMessage(parseStaffMessage(commandSender, StringUtilities.toString(args)));
+		broadcastMessage(commandSender, StringUtilities.toString(args));
 		
 		return true;
 	

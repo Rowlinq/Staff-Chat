@@ -1,5 +1,7 @@
 package net.javaportals.staffchat.utils;
 
+import java.util.Random;
+
 import org.bukkit.ChatColor;
 
 import net.javaportals.staffchat.StaffChat;
@@ -62,6 +64,37 @@ public class StringUtilities
 	{
 		
 		return ChatColor.translateAlternateColorCodes('&', message);
+		
+	}
+	
+	public static String generateRandomString()
+	{
+		
+		return generateRandomString(75);
+		
+	}
+	
+	public static String generateRandomString(int length)
+	{
+		
+		return generateRandomString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", length);
+		
+	}
+	
+	public static String generateRandomString(String characters, int length)
+	{
+		
+		String s = "";
+		Random r = new Random();
+		
+		for(int i = 0; i < length; i++)
+		{
+			
+			s += characters.toCharArray()[r.nextInt(characters.length())];
+			
+		}
+		
+		return s;
 		
 	}
 	

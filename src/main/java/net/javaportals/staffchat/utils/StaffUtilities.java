@@ -1,15 +1,19 @@
 package net.javaportals.staffchat.utils;
 
 import net.javaportals.staffchat.StaffChat;
+import net.javaportals.staffchat.events.message.StaffMessageEvent;
+import net.javaportals.staffchat.events.message.StaffMessagedEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+
 import static net.javaportals.staffchat.utils.StringUtilities.*;
 
 public class StaffUtilities
 {
 	
+	@Deprecated
 	public static String parseStaffMessage(CommandSender sender, String message)
 	{
 		
@@ -84,6 +88,7 @@ public class StaffUtilities
 		
 	}
 	
+	@Deprecated
 	public static void broadcastStaffMessage(String message)
 	{
 		
@@ -107,6 +112,102 @@ public class StaffUtilities
 		}
 		
 		Bukkit.getConsoleSender().sendMessage(message);
+		
+	}
+	
+	public static void broadcastMessage(CommandSender staffMember, String message)
+	{
+		
+		StaffMessageEvent event = new StaffMessageEvent(staffMember, message, StaffChat.getStaffChat().getConfiguration().getFormat());
+		Bukkit.getPluginManager().callEvent(event);
+		
+		if(event.isCancelled())
+		{
+			
+			return;
+			
+		}
+		
+		message = parse(event.getStaffMember(), event.getMessage(), event.getFormat(), event.getGroup());
+		
+		for(Player player : Bukkit.getOnlinePlayers())
+		{
+			
+			if(!isStaff(player))
+			{
+				
+				if(!player.hasPermission(Permissions.LISTEN))
+				{
+					
+					return;
+					
+				}
+				
+			}
+			
+			player.sendMessage(message);
+			Bukkit.getPluginManager().callEvent(new StaffMessagedEvent(player, event.getGroup(), event.getFormat(), message));
+			
+		}
+		
+		Bukkit.getConsoleSender().sendMessage(message);
+		Bukkit.getPluginManager().callEvent(new StaffMessagedEvent(Bukkit.getConsoleSender(), event.getGroup(), event.getFormat(), message));
+		
+	}
+	
+	public static String parse(CommandSender sender, String message, String format, String group)
+	{
+		
+		if(format.equalsIgnoreCase(""))
+		{
+			
+			StaffChat.getStaffChat().getConfiguration().getFormat();
+		
+		}
+		
+		format = StringUtilities.replaceCodes(format);
+		
+		if(sender.hasPermission(Permissions.COLOR))
+		{
+			
+			message = StringUtilities.replaceCodes(message);
+			
+		}
+		
+		format = format.replace("#MESSAGE#", message);
+		
+		if(sender instanceof ConsoleCommandSender)
+		{
+
+			
+			format = format.replace("#PLAYER#", "Console");
+			format = format.replace("#UUID#", "");
+			format = format.replace("#DISPLAY#", "Console");
+			format = format.replace("#GROUP#", "");
+			format = format.replace("#CUSTOM#", "");
+			
+			return format;
+			
+		}
+		
+		Player player = (Player) sender;
+		format = format.replace("#PLAYER#", player.getName());
+		format = format.replace("#GROUP#", group);
+		format = format.replace("#UUID#", player.getUniqueId().toString());
+		format = format.replace("#DISPLAY#", player.getDisplayName());
+		
+		try
+		{
+			
+			format = format.replace("#CUSTOM#", player.getCustomName());
+			
+		}
+		catch(NullPointerException e)
+		{
+			
+		}
+		
+		return format;
 		
 	}
 	
