@@ -1,5 +1,6 @@
 <project name="StaffChat" default="build">
     <target name="build">
+    	
         <mkdir dir="build"/>
         <javac srcdir="src" destdir="build" debug="on">
             <classpath>
