@@ -38,7 +38,7 @@ public class JoinListener implements Listener
 		if(e.getPlayer().hasPermission(Permissions.UPDATE) && StaffChat.getStaffChat().getUpdater().isUpdateAvailable())
 		{
 			
-			e.getPlayer().sendMessage(StringUtilities.formatInfo("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroet"));
+			e.getPlayer().sendMessage(StringUtilities.formatInfo("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroe"));
 			
 		}
 		

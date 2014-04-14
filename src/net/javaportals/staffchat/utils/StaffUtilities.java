@@ -121,11 +121,18 @@ public class StaffUtilities
 		}
 		
 		Player player = (Player) sender;
-	
-		if(StaffChat.getStaffChat().getPermission().hasGroupSupport())
+		
+		if(!StaffChat.getStaffChat().isVaultPresent())
 		{
 			
-			if(StaffChat.getStaffChat().isPermissionsPresent())
+			return false;
+			
+		}
+	
+		if(StaffChat.getStaffChat().isPermissionsPresent())
+		{
+			
+			if(StaffChat.getStaffChat().getPermission().hasGroupSupport())
 			{
 				
 				for(String playerGroup : StaffChat.getStaffChat().getPermission().getPlayerGroups(player))

@@ -82,7 +82,7 @@ public class Updater
 					if(player.hasPermission(Permissions.UPDATE))
 					{
 						
-						player.sendMessage(StringUtilities.formatSuccess("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroe"));
+						player.sendMessage(StringUtilities.formatInfo("An update is available! get it at http://dev.bukkit.org/bukkit-plugins/staffchatbyroe"));
 						
 					}
 					
